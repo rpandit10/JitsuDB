@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+.env.local
+
+# Runtime data (generated at runtime — never commit)
+data/
+
+# Model caches
+.cache/
+huggingface/
+whisper/
+sentence_transformers/
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local configuration (copy config.example.yaml → config.yaml)
+config.yaml
+
+# Local video-library catalogue (see Index.example.md for the format)
+Index.md
+
+# Local agent / editor state
+.claude/
+.pytest_cache/
+
+# Planning and design notes — not part of the published project
+ROADMAP.md
+instructions.md
+jitsudb_enhancement_prompt.md
+jitsudb_research_gaps.md
+eval/RESULTS.md
+eval/relevance_schema.md
+
+# Downloaded model weights
+models/
+frontend/models/
+
+# Eval artefacts generated from a local library
+eval/results/
+eval/*.jsonl
+!eval/*.example.jsonl

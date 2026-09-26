@@ -1,0 +1,90 @@
+paths:
+  video_library: "/path/to/your/video/library"
+  data_dir: "./data"
+
+transcription:
+  model_size: "medium"
+  device: "cuda"
+  compute_type: "float16"
+  language: "en"
+  glossary_path: "./jitsudb/taxonomy/glossary.txt"
+
+chunking:
+  chunk_duration_seconds: 45
+  overlap_seconds: 15
+  sentence_snap_window_seconds: 5
+
+embedding:
+  model_name: "nomic-ai/nomic-embed-text-v1.5"
+  device: "cuda"
+  embedding_dim: 768
+  query_prefix: "search_query: "
+  document_prefix: "search_document: "
+  trust_remote_code: true
+  collection_name: "jitsudb_chunks_v2"
+  encoder_path: "models/nomic-embed-text-v1.5"   # local path; set null to load from HuggingFace Hub
+  ft_collection: "text_ft"
+
+reranker:
+  enabled: true
+  model_name: "cross-encoder/ms-marco-MiniLM-L-6-v2"
+  device: "cuda"
+  conformal_coverage: 0.90   # set to 0.90 to enable conformal prediction
+
+visual_embedding:
+  enabled: true
+  model_name: "clip-ViT-B-32"
+  device: "cuda"
+  visual_weight: 0.3
+
+rag:
+  enabled: true
+  ollama_url: "http://localhost:11434"
+  model: "llama3.2:3b"
+  max_context_chunks: 5
+  max_tokens: 400
+  temperature: 0.1
+  faithfulness_check: false  # set to true to enable per-sentence NLI entailment check
+
+search:
+  default_top_k: 30
+  semantic_weight: 0.7
+  beam_width: 2
+  max_expand: 4
+  reranker_top_k: 20
+  candidate_k: 30
+  hyde_enabled: true       # HyDE query expansion via Ollama
+  hyde_n_hypotheticals: 1  # upper bound; adaptive logic reduces this for short queries
+  colbert_enabled: true    # ColBERT late-interaction rescoring
+  colbert_weight: 0.3      # blend weight when colbert_enabled (0=off, 1=colbert only)
+
+thumbnails:
+  width: 320
+  format: "jpg"
+  quality: 5
+
+clips:
+  duration_seconds: 15
+  padding_seconds: 3
+  max_cache_count: 100
+  width: 640
+
+queue:
+  fallback_order: "folder"
+
+youtube:
+  enabled: true
+  download_dir: "./data/youtube_downloads"
+  default_format: "bestvideo[height<=1080]+bestaudio/best"
+  scraper:
+    # YouTube channel URLs to scrape for new instructionals.
+    # Add channels you trust, e.g. "https://www.youtube.com/@ChannelName"
+    reputable_channels: []
+    search_tags:
+      - "BJJ instructional"
+      - "jiu jitsu technique breakdown"
+      - "grappling instructional"
+    max_results_per_tag: 10
+    max_per_channel: 10
+    min_duration_seconds: 60      # ignore shorts / clips
+    cache_ttl_seconds: 3600       # 1 h between auto-refreshes
