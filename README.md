@@ -2,7 +2,7 @@
 
 JitsuDB is a local-first search engine for Brazilian jiu-jitsu videos. Search "kimura from closed guard" and it finds the exact timestamps in your DVD, YouTube, or digital instructionals where that technique is taught, then writes a short answer citing those clips.
 
-> **Proof of concept.** I built this to learn how the parts of a retrieval system work together: speech-to-text, dense and multimodal retrieval, reranking, late interaction, RAG, and the feedback loops around them. It runs on my own library. It isn't packaged or hardened for anyone else's.
+> **Proof of concept.** I built this to learn how the parts of a retrieval system work together: speech-to-text, dense and multimodal retrieval, reranking, late interaction, RAG, and the feedback loops around them. It runs on my own library. It isn't packaged or hardened for anyone else's, but I am working to add YouTube scraping functionalites so anyone can build their own library. 
 
 **Stack:** Python 3.11, FastAPI, SQLite, ChromaDB, faster-whisper, sentence-transformers, CLIP, Ollama, React, Vite
 
@@ -64,7 +64,7 @@ Without a golden set, `run_eval.py` generates synthetic queries from the labels 
 ## Limitations
 
 - The taxonomy is hand-built for BJJ, and the classifier is keyword matching, not a trained model.
-- No videos are included. You bring your own.
+- No videos are included. You are responsible for providing them to the software. 
 - The API binds to loopback and has no auth.
 - Videos process one at a time to stay within a single GPU's VRAM.
 
